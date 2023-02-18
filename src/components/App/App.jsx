@@ -21,7 +21,18 @@ export class App extends Component {
       ...data,
       id: nanoid(10),
     };
-    this.setState(({ contacts }) => ({ contacts: [newContact, ...contacts] }));
+
+    const isExistName = this.state.contacts
+      .map(contact => contact.name.toLowerCase())
+      .includes(newContact.name.toLowerCase());
+
+    const message = `${newContact.name} is already in contacts`;
+
+    isExistName
+      ? alert(message)
+      : this.setState(({ contacts }) => ({
+          contacts: [newContact, ...contacts],
+        }));
   };
 
   getVisibleContacts = () => {
