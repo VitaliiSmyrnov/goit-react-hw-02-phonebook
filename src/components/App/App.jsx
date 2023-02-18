@@ -7,8 +7,6 @@ export class App extends Component {
   state = {
     contacts: initialContacts,
     filter: '',
-    name: '',
-    number: '',
   };
 
   handleInputChange = e => {
@@ -35,6 +33,12 @@ export class App extends Component {
         }));
   };
 
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   getVisibleContacts = () => {
     const { filter, contacts } = this.state;
     const normalizedFilter = filter.toLowerCase();
@@ -45,7 +49,8 @@ export class App extends Component {
 
   render() {
     const { filter } = this.state;
-    const { addContact, handleInputChange, getVisibleContacts } = this;
+    const { addContact, deleteContact, handleInputChange, getVisibleContacts } =
+      this;
     const visibleContacts = getVisibleContacts();
 
     return (
@@ -56,7 +61,10 @@ export class App extends Component {
 
           <h2>Contacts</h2>
           <Filter filter={filter} onChange={handleInputChange} />
-          <ContactList contacts={visibleContacts} />
+          <ContactList
+            contacts={visibleContacts}
+            onDeleteContact={deleteContact}
+          />
         </div>
       </>
     );
