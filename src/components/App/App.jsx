@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import initialContacts from 'db/initialContacts.json';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: initialContacts,
+    filter: '',
     name: '',
     number: '',
   };
@@ -30,9 +32,17 @@ export class App extends Component {
     this.setState({ name: '', number: '' });
   };
 
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
   render() {
-    const { name, number, contacts } = this.state;
-    const { handleInputChange } = this;
+    const { name, number, filter, contacts } = this.state;
+    const { handleInputChange, getVisibleContacts } = this;
 
     return (
       <>
@@ -65,8 +75,15 @@ export class App extends Component {
           <button type="submit">Add contact</button>
         </form>
         <h1>Contacts</h1>
+        <p>Find contacts by name</p>
+        <input
+          type="text"
+          name="filter"
+          value={filter}
+          onChange={handleInputChange}
+        ></input>
         <ul>
-          {contacts.map(({ id, name, number }) => (
+          {getVisibleContacts().map(({ id, name, number }) => (
             <li key={id}>
               {name}: {number}
             </li>
