@@ -7,7 +7,7 @@ export const theme = Object.freeze({
     background: '#c1c1c1',
     backgroundLight: '#e3e3e3',
     primary: '#07c',
-    secondary: '#aecfd8',
+    secondary: '#add8e6',
     accent: '#ff6347',
     muted: '#f6f6f6',
     border: '#c1c1c1',
@@ -19,8 +19,9 @@ export const theme = Object.freeze({
     monospace: 'Menlo, monospace',
   },
   fontSizes: {
+    xs: '14px',
     sm: '16px',
-    md: '20px',
+    md: '24px',
     lg: '32px',
   },
   fontWeights: {

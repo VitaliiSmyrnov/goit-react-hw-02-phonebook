@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import initialContacts from 'db/initialContacts.json';
 import { ContactForm, Filter, ContactList } from 'components';
+import {
+  StyledContactsBox,
+  StyledContainer,
+  StyledWrapper,
+} from './App.styled';
 
 export class App extends Component {
   state = {
@@ -54,19 +59,21 @@ export class App extends Component {
     const visibleContacts = getVisibleContacts();
 
     return (
-      <>
-        <div>
+      <StyledWrapper>
+        <StyledContainer>
           <h1>Phonebook</h1>
           <ContactForm onSubmit={addContact} />
 
-          <h2>Contacts</h2>
-          <Filter value={filter} onChange={handleInputChange} />
-          <ContactList
-            contacts={visibleContacts}
-            onDeleteContact={deleteContact}
-          />
-        </div>
-      </>
+          <StyledContactsBox>
+            <h2>Contacts</h2>
+            <Filter value={filter} onChange={handleInputChange} />
+            <ContactList
+              contacts={visibleContacts}
+              onDeleteContact={deleteContact}
+            />
+          </StyledContactsBox>
+        </StyledContainer>
+      </StyledWrapper>
     );
   }
 }

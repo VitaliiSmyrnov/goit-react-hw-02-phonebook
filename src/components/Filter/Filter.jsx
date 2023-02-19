@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 
 export const Filter = ({ value, onChange }) => {
   return (
-    <>
-      <p>Find contacts by name</p>
+    <label>
+      Find contacts by name
       <input
         type="text"
         name="filter"
@@ -11,7 +11,7 @@ export const Filter = ({ value, onChange }) => {
         onChange={onChange}
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
       ></input>
-    </>
+    </label>
   );
 };
 
